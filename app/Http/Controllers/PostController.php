@@ -4,14 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class BlogController extends Controller
+class PostController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view('blogs.index');
+        return view('posts.index');
     }
 
     /**
@@ -35,7 +35,7 @@ class BlogController extends Controller
      */
     public function show(string $id)
     {
-        return view('blogs.blog_detail');
+        return view('posts.post_detail');
     }
 
     /**
