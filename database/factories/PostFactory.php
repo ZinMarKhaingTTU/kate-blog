@@ -18,7 +18,7 @@ class PostFactory extends Factory
     {
         return [
             'title' => $this->faker->word,
-            'description' => $this->faker->word,
+            'description' => $this->faker->paragraph,
             'photo' => $this->faker->imageUrl,
             'categoryID' => rand(1,10),
             'userID' => rand(1,10),
