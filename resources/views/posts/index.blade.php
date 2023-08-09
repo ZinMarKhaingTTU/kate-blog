@@ -16,30 +16,23 @@
                         </div>
                     </div>
                     <!-- Nested row for non-featured blog posts-->
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <!-- Blog post-->
-                            <div class="card mb-4">
-                                <a href="#!"><img class="card-img-top" src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg" alt="..." /></a>
-                                <div class="card-body">
-                                    <div class="small text-muted">January 1, 2023</div>
-                                    <h2 class="card-title h4">Post Title</h2>
-                                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla.</p>
-                                    <a class="btn btn-primary" href="#!">Read more →</a>
+                    <div class="row gx-5">
+                        @foreach ( $posts as $post)
+                            <div class="col col-lg-6">
+                                <!-- Blog post-->
+                                <div class="card mb-4">
+                                    <a href="#!"><img class="card-img-top" src="{{ $post->photo }}" alt="..." /></a>
+                                    <div class="card-body">
+                                        <div class="small text-muted">January 1, 2023</div>
+                                        <h2 class="card-title h4">{{ $post->title }}</h2>
+                                        <p class="card-text">{{ $post->description }}</p>
+                                        <a class="btn btn-primary" href="{{ route('posts.show' , $post->id) }}">Read more →</a>
+                                    </div>
                                 </div>
                             </div>
-                            <!-- Blog post-->
-                            <div class="card mb-4">
-                                <a href="#!"><img class="card-img-top" src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg" alt="..." /></a>
-                                <div class="card-body">
-                                    <div class="small text-muted">January 1, 2023</div>
-                                    <h2 class="card-title h4">Post Title</h2>
-                                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla.</p>
-                                    <a class="btn btn-primary" href="#!">Read more →</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
+                        @endforeach
+
+                        {{-- <div class="col-lg-6">
                             <!-- Blog post-->
                             <div class="card mb-4">
                                 <a href="#!"><img class="card-img-top" src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg" alt="..." /></a>
@@ -60,7 +53,7 @@
                                     <a class="btn btn-primary" href="#!">Read more →</a>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                     <!-- Pagination-->
                     <nav aria-label="Pagination">
