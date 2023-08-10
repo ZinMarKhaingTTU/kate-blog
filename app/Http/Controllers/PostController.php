@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -13,7 +14,8 @@ class PostController extends Controller
     public function index()
     {
         $posts = Post::all();
-        return view('posts.index' , compact('posts'));
+        $categories = Category::all();
+        return view('posts.index' , compact('posts', 'categories'));
     }
 
     /**
@@ -38,7 +40,8 @@ class PostController extends Controller
     public function show(string $id)
     {
         $post = Post::find($id);
-        return view('posts.post_detail', compact('post'));
+        $categories = Category::all();
+        return view('posts.post_detail', compact('post' ,'categories'));
     }
 
     /**
