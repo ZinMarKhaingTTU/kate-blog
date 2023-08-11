@@ -17,6 +17,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::resource('posts', App\Http\Controllers\PostController::class);
+Route::get('posts/category/{id}', [App\Http\Controllers\PostController::class ,'postCategory'])->name('post_category');
+
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

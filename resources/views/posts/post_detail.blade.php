@@ -91,7 +91,7 @@
                                 <div class="col-sm-6"> --}}
                                     <ul class="row row-cols-2 list-unstyled mb-0 ms-2">
                                         @foreach ($categories as $category)
-                                            <li class="list-group-item"><a href="#!">{{ $category->name }}</a></li>
+                                            <li class="list-group-item"><a href="{{ route('post_category',$category->id) }}">{{ $category->name }}</a></li>
                                         @endforeach
                                     </ul>
                                 {{-- </div>
