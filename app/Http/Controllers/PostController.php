@@ -69,8 +69,9 @@ class PostController extends Controller
     }
     public function postCategory(string $categoryID){
 
-        $post_categories = Post::where('categoryID' ,$categoryID)->get();
+        $post_categories = Post::where('category_id' ,$categoryID)->get();
+        $categories = Category::all();
         // dd($postCategory);
-        return view('posts.post_category',compact('post_categories'));
+        return view('posts.post_category',compact('post_categories','categories'));
     }
 }
