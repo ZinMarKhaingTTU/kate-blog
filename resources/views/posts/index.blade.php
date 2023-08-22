@@ -55,6 +55,7 @@
                             </div>
                         </div> --}}
                     </div>
+                    {{-- {{ $posts->links() }} --}}
                     <!-- Pagination-->
                     <nav aria-label="Pagination">
                         <hr class="my-0" />

@@ -13,12 +13,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [App\Http\Controllers\PostController::class, 'index']);
 Route::resource('posts', App\Http\Controllers\PostController::class);
 Route::get('posts/category/{id}', [App\Http\Controllers\PostController::class ,'postCategory'])->name('post_category');
 
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+/* Admin Backend */
+Route::prefix('admin')->group(function () {
+    Route::get( '/', [App\Http\Controllers\Admin\DashboardController::class,'index'])->name('dashboard');
+    Route::resource('admin-posts', App\Http\Controllers\Admin\PostController::class);
+    Route::resource('categories', App\Http\Controllers\Admin\CategoryController::class);
+    Route::resource('users', App\Http\Controllers\Admin\UserController::class);
+});
