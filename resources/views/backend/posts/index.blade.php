@@ -2,7 +2,10 @@
 @section('content')
 <main>
     <div class="container-fluid px-4">
-        <h1 class="mt-4">Posts</h1>
+        <div class="my-5">
+            <h1 class="mt-4 d-inline">Posts</h1>
+            <a href="{{ route('admin-posts.create') }}" class="btn btn-primary float-end">Add Post</a>
+        </div>
         <div class="card mb-4">
             <div class="card-header">
                 <i class="fas fa-table me-1"></i>

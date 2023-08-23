@@ -13,7 +13,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::paginate(5);
+        $categories = Category::orderBy('id','desc')->paginate(5);
         return view('backend.categories.index',compact('categories'));
     }
 
@@ -22,7 +22,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('backend.categories.create');
     }
 
     /**
@@ -30,7 +30,10 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // dd($request);
+        $categories = Category::create($request->all());
+        $categories->save();
+        return redirect()->route('categories.index');
     }
 
     /**

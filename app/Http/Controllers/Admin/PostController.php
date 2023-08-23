@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Post;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -13,7 +14,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::paginate(5);
+        $posts = Post::orderBy('id','desc')->paginate(5);
         return view('backend.posts.index',compact('posts'));
     }
 
@@ -22,7 +23,8 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        $categories = Category::all();
+        return view('backend.posts.create',compact('categories'));
     }
 
     /**
@@ -30,7 +32,15 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request['user_id'] = 1;
+        $posts = Post::create($request->all());
+        $fileName = time().'.'.$request->photo->extension();
+        $upload = $request->photo->move(public_path('images/'),$fileName);
+        if($upload){
+            $posts->photo = '/images/'.$fileName;
+        }
+        $posts->save();
+        return redirect()->route('admin-posts.index');
     }
 
     /**
