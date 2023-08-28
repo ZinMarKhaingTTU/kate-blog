@@ -34,7 +34,7 @@ class CategoryController extends Controller
         // dd($request);
         $categories = Category::create($request->all());
         $categories->save();
-        return redirect()->route('categories.index');
+        return redirect()->route('admin.categories.index');
     }
 
     /**
@@ -66,6 +66,8 @@ class CategoryController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $category = Category::find($id);
+        $category->delete();
+        return redirect()->route('admin.categories.index');
     }
 }

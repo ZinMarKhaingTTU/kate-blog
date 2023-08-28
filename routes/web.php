@@ -22,9 +22,9 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 /* Admin Backend */
-Route::prefix('admin')->group(function () {
+Route::group(['prefix' =>'admin' ,'as'=>'admin.'],function () {
     Route::get( '/', [App\Http\Controllers\Admin\DashboardController::class,'index'])->name('dashboard');
-    Route::resource('admin-posts', App\Http\Controllers\Admin\PostController::class);
+    Route::resource('posts', App\Http\Controllers\Admin\PostController::class);
     Route::resource('categories', App\Http\Controllers\Admin\CategoryController::class);
     Route::resource('users', App\Http\Controllers\Admin\UserController::class);
 });

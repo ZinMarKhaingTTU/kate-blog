@@ -41,7 +41,7 @@ class PostController extends Controller
             $posts->photo = '/images/'.$fileName;
         }
         $posts->save();
-        return redirect()->route('admin-posts.index');
+        return redirect()->route('admin.posts.index');
     }
 
     /**
@@ -73,6 +73,8 @@ class PostController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $post = POST::find($id);
+        $post->delete();
+        return redirect()->route('admin.posts.index');
     }
 }

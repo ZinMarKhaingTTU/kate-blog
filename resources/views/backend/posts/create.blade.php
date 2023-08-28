@@ -8,7 +8,7 @@
         </div>
         <div class="card mb-4">
             <div class="card-body">
-                <form class="row g-3" action="{{ route('admin-posts.store')}}" method="POST" enctype="multipart/form-data">
+                <form class="row g-3" action="{{ route('admin.posts.store')}}" method="POST" enctype="multipart/form-data">
                     {{  csrf_field() }}
                     <div class="col-md-6 position-relative">
                         <label for="title" class="form-label">Title</label>
