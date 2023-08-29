@@ -71,7 +71,7 @@
                             </a>
                             <a class="nav-link" href="{{ route('admin.posts.index') }}">
                                 <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
-                                Items
+                                Posts
                             </a>
 
                         </div>

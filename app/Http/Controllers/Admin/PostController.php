@@ -7,6 +7,7 @@ use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Requests\PostRequest;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\PostUpdateRequest;
 
 class PostController extends Controller
 {
@@ -57,15 +58,30 @@ class PostController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $post = Post::find($id);
+        $categories = Category::all();
+        return view('backend.posts.edit',compact('post','categories'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(PostUpdateRequest $request, string $id)
     {
-        //
+        $post = Post::find($id);
+        $post->update($request->all());
+        if($request->hasFile('new_photo')){
+            $fileName = time().'.'.$request->new_photo->extension();
+            $upload = $request->new_photo->move(public_path('images/'),$fileName);
+        if($upload){
+            $post->photo = '/images/'.$fileName;
+        }
+        }else{
+            $post->photo = $request->old_photo;
+        }
+        $post->save();
+        return redirect()->route('admin.posts.index');
+
     }
 
     /**
