@@ -2,7 +2,10 @@
 @section('content')
 <main>
     <div class="container-fluid px-4">
-        <h1 class="mt-4">Users</h1>
+        <div class="my-5">
+            <h1 class="mt-4 d-inline">Users</h1>
+            <a href="{{ route('admin.users.create') }}" class="btn btn-primary float-end">Add User</a>
+        </div>
         <div class="card mb-4">
             <div class="card-header">
                 <i class="fas fa-table me-1"></i>
@@ -32,7 +35,10 @@
                             <td>{{ $user->name }}</td>
                             <td>{{ $user->email }}</td>
                             <td>{{ $user->role }}</td>
-                            <td></td>
+                            <td>
+                                <a href="{{ route("admin.users.edit" ,$user->id) }}" class="btn btn-sm btn-warning"><i class="fa-solid fa-pen-to-square"></i></a>
+                                <button class="btn btn-sm btn-danger delete" data-id={{ $user->id }}><i class="fa-solid fa-trash"></i></button>
+                            </td>
                         </tr>
                         @endforeach
                     </tbody>

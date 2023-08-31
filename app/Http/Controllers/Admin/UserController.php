@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Http\Requests\UserRequest;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -13,7 +15,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::paginate(5);
+        $users = User::orderBy('id','DESC')->paginate(5);
         return view('backend.users.index',compact('users'));
     }
 
@@ -22,15 +24,18 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        return view('backend.users.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(UserRequest $request)
     {
-        //
+        $user = User::create($request->all());
+        $user->password = Hash::make($request->password);
+        $user->save();
+        return redirect()->route('admin.users.index');
     }
 
     /**
@@ -63,5 +68,14 @@ class UserController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function perform()
+    {
+        Session::flush();
+
+        Auth::logout();
+
+        return redirect('login');
     }
 }

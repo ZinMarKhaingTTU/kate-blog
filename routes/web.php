@@ -22,9 +22,11 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 /* Admin Backend */
-Route::group(['prefix' =>'admin' ,'as'=>'admin.'],function () {
+Route::group(['middleware'=>['auth'],'prefix' =>'admin' ,'as'=>'admin.'],function () {
     Route::get( '/', [App\Http\Controllers\Admin\DashboardController::class,'index'])->name('dashboard');
     Route::resource('posts', App\Http\Controllers\Admin\PostController::class);
     Route::resource('categories', App\Http\Controllers\Admin\CategoryController::class);
     Route::resource('users', App\Http\Controllers\Admin\UserController::class);
+    // Route::post('/logout', [App\Http\Controllers\Admin\UserController::class, 'perform'])->name('logout.perform');
+
 });
