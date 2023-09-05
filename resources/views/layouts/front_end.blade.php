@@ -10,7 +10,9 @@
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
         <!-- Core theme CSS (includes Bootstrap)-->
         {{-- <link href="css/styles.css" rel="stylesheet" /> --}}
-        @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+        {{-- @vite(['resources/sass/app.scss', 'resources/js/app.js']) --}}
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"  rel="stylesheet" />
+
 
     </head>
     <body>
@@ -25,22 +27,73 @@
                         <li class="nav-item"><a class="nav-link" href="#!">Categories</a></li>
                         <li class="nav-item"><a class="nav-link" href="#!">Contact</a></li>
                         <li class="nav-item"><a class="nav-link active" aria-current="page" href="/">Blog</a></li>
+                        @if(Auth::user())
+                        <div class="dropdown">
+                            <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
+                                <ul class="navbar-nav">
+                                  <li class="nav-item dropdown">
+                                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                        {{ Auth::user()->name }}
+                                    </a>
+                                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                      <li><a class="dropdown-item" href="{{ route('user.profile', Auth::user()->id ) }}">Profile</a></li>
+                                      <li>
+
+                                        {{-- <a class="dropdown-item" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                            @csrf
+                                        </form> --}}
+                                        <a class="dropdown-item" href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
+                                    </a>
+
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                        @csrf
+                                    </form>
+                                    </li>
+                                    </ul>
+                                  </li>
+                                </ul>
+                              </div>
+
+                                {{-- <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    {{ Auth::user()->name }}
+                                </a>
+
+                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                    onclick="event.preventDefault();
+                                                    document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
+                                    </a>
+
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                        @csrf
+                                    </form> --}}
+                                </div>
+
+                        @else
+                        <a href="/login" class="btn btn-primary mx-3"> Login</a>
+                        <a href="/register" class="btn btn-outline-danger"> Register</a>
+                        @endif
                     </ul>
                 </div>
             </div>
         </nav>
         <!-- Page header with logo and tagline-->
-        <header class="py-5 bg-light border-bottom mb-4">
+        <header class="py-5 bg-light mb-4">
             <div class="container">
-                <div class="text-center my-5">
-                    <h1 class="fw-bolder">Welcome to Blog Home!</h1>
-                    <p class="lead mb-0">A Bootstrap 5 starter layout for your next blog homepage</p>
-                </div>
+                {{-- <div class="text-center my-5"> --}}
+                    {{-- <h1 class="fw-bolder">Welcome to Blog Home!</h1>
+                    <p class="lead mb-0">A Bootstrap 5 starter layout for your next blog homepage</p> --}}
+                {{-- </div> --}}
             </div>
         </header>
         @yield('content')
         <!-- Footer-->
-        <footer class="py-5 bg-dark">
+        <footer class="py-5 bg-dark fixed-bottom">
             <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2023</p></div>
         </footer>
         <!-- Bootstrap core JS-->

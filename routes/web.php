@@ -20,6 +20,8 @@ Route::get('posts/category/{id}', [App\Http\Controllers\PostController::class ,'
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/profile/{id}', [App\Http\Controllers\HomeController::class, 'UserProfile'])->name('user.profile');
+Route::post('/profile/{id}', [App\Http\Controllers\HomeController::class, 'ProfileUpdate'])->name('profile.update');
 
 /* Admin Backend */
 Route::group(['middleware'=>['auth'],'prefix' =>'admin' ,'as'=>'admin.'],function () {
